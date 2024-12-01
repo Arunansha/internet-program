@@ -8,123 +8,87 @@ class FibonacciSeries
 {
     static void Main()
     {
-        // Ask the user for the number of terms in the Fibonacci series
-        Console.Write("Enter the number of terms in the Fibonacci series: ");
-        int terms = int.Parse(Console.ReadLine());
+        Console.Write("Enter the number of terms: ");
+        int n = int.Parse(Console.ReadLine());
 
-        // Checking if the number of terms is greater than 0
-        if (terms <= 0)
-        {
-            Console.WriteLine("Please enter a positive integer greater than 0.");
-        }
-        else if (terms == 1)
-        {
-            // Special case when only one term is requested
-            Console.WriteLine("Fibonacci series: 0");
-        }
-        else
-        {
-            // Initialize the first two Fibonacci numbers
-            int first = 0, second = 1;
+        int a = 0, b = 1, c;
 
-            // Display the first two terms
-            Console.WriteLine("Fibonacci series:");
-            Console.Write(first + " " + second + " ");
-
-            // Loop to generate the rest of the Fibonacci series
-            for (int i = 3; i <= terms; i++)
-            {
-                int nextTerm = first + second;
-                Console.Write(nextTerm + " ");
-                
-                // Update first and second to the next pair in the series
-                first = second;
-                second = nextTerm;
-            }
+        Console.Write("Fibonacci Series: ");
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write(a + " ");
+            c = a + b;
+            a = b;
+            b = c;
         }
     }
 }
 
-
-
 -------------------------------------------------------------------------------
-3.	Write a program using C# to generate the following pattern using Conditional statements and loop.
+2.	Write a program using C# to generate the following pattern using Conditional statements and loop.
 Ans.
 using System;
 
-class Program
+class Pattern
 {
     static void Main()
     {
-        int n = 5; // Number of rows in the pyramid
+        Console.Write("Enter the number of rows: ");
+        int n = int.Parse(Console.ReadLine());
 
         for (int i = 1; i <= n; i++)
         {
-            // Print leading spaces for alignment
-            for (int space = 1; space <= n - i; space++)
+            for (int j = 1; j <= i; j++)
             {
-                Console.Write(" ");
+                Console.Write(j);
             }
 
-            // Print increasing numbers
-            for (int num = 1; num <= i; num++)
+            for (int j = i - 1; j >= 1; j--)
             {
-                Console.Write(num);
+                Console.Write(j);
             }
 
-            // Print decreasing numbers
-            for (int num = i - 1; num >= 1; num--)
-            {
-                Console.Write(num);
-            }
-
-            // Move to the next line
             Console.WriteLine();
         }
     }
 }
--------------------------------------------------------------------------------
-4.	Write a program using C# to test for prime numbers using Conditional statements and loop.
+--------------------------------------------------------------------------------
+3.	Write a program using C# to test for prime numbers using Conditional statements and loop.
 Ans.
 using System;
 
-class PrimeNumberTest
+class PrimeNumber
 {
     static void Main()
     {
-        // Ask the user to input a number to test for primality
-        Console.Write("Enter a number to check if it is prime: ");
-        int number = int.Parse(Console.ReadLine());
+        Console.Write("Enter a number: ");
+        int num = int.Parse(Console.ReadLine());
 
-        // Check if the number is less than 2 (prime numbers are greater than 1)
-        if (number <= 1)
+        bool isPrime = true;
+
+        if (num <= 1)
         {
-            Console.WriteLine($"{number} is not a prime number.");
+            isPrime = false;
         }
         else
         {
-            bool isPrime = true;
-
-            // Loop from 2 to the square root of the number
-            for (int i = 2; i <= Math.Sqrt(number); i++)
+            for (int i = 2; i <= Math.Sqrt(num); i++)
             {
-                // If the number is divisible by i, it is not prime
-                if (number % i == 0)
+                if (num % i == 0)
                 {
                     isPrime = false;
-                    break;  // Exit the loop as we found a divisor
+                    break;
                 }
             }
+        }
 
-            // Output the result based on the isPrime flag
-            if (isPrime)
-            {
-                Console.WriteLine($"{number} is a prime number.");
-            }
-            else
-            {
-                Console.WriteLine($"{number} is not a prime number.");
-            }
+        if (isPrime)
+        {
+            Console.WriteLine(num + " is a prime number.");
+        }
+        else
+        {
+            Console.WriteLine(num + " is not a prime number.");
         }
     }
 }
@@ -132,41 +96,35 @@ class PrimeNumberTest
 
 
 -------------------------------------------------------------------------------
-6.	Write a program using C# to reverse a number and find sum of digits of the number using Conditional statement and loop.
+4.	Write a program using C# to reverse a number and find sum of digits of the number using Conditional statement and loop.
 Ans.
 using System;
 
-class ReverseAndSum
+class ReverseAndSumDigits
 {
     static void Main()
     {
-        // Input the number
         Console.Write("Enter a number: ");
-        int number = int.Parse(Console.ReadLine());
+        int num = int.Parse(Console.ReadLine());
 
-        int reverse = 0, sum = 0;
+        int reversedNum = 0, sum = 0;
+        int originalNum = num;
 
-        // Store the original number for sum calculation
-        int temp = number;
-
-        // Reverse the number and find the sum of digits
-        while (number != 0)
+        while (num > 0)
         {
-            int digit = number % 10;  // Get the last digit
-            reverse = reverse * 10 + digit; // Reverse the number
-            sum += digit;              // Add digit to sum
-            number /= 10;              // Remove the last digit
+            int digit = num % 10;
+            reversedNum = reversedNum * 10 + digit;
+            sum += digit;
+            num /= 10;
         }
 
-        // Display the results
-        Console.WriteLine($"Reversed number: {reverse}");
-        Console.WriteLine($"Sum of digits: {sum}");
+        Console.WriteLine("Reversed number: " + reversedNum);
+        Console.WriteLine("Sum of digits: " + sum);
     }
 }
-
 -------------------------------------------------------------------------------
 
-8.	Write a program to declare a class ‘staff’ having data members as name and post. Accept data for 5 staffs and display names of staff who are HOD.
+5.	Write a program to declare a class ‘staff’ having data members as name and post. Accept data for 5 staffs and display names of staff who are HOD.
 Ans.
 using System;
 
@@ -174,39 +132,47 @@ class Staff
 {
     public string Name;
     public string Post;
+
+    public void GetStaffDetails()
+    {
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
+
+        Console.Write("Enter Post: ");
+        Post = Console.ReadLine();
+    }
+
+    public void DisplayHOD()
+    {
+        if (Post.ToLower() == "hod" || Post.ToUpper() == "HOD")
+        {
+            Console.WriteLine(Name);
+        }
+    }
 }
 
 class Program
 {
     static void Main()
     {
-        Staff[] staffMembers = new Staff[5];
+        Staff[] staffArray = new Staff[5];
 
-        // Accept data for 5 staff members
         for (int i = 0; i < 5; i++)
         {
-            staffMembers[i] = new Staff();
-            Console.Write($"Enter name of staff {i + 1}: ");
-            staffMembers[i].Name = Console.ReadLine();
-            Console.Write($"Enter post of staff {i + 1}: ");
-            staffMembers[i].Post = Console.ReadLine();
+            staffArray[i] = new Staff();
+            staffArray[i].GetStaffDetails();
         }
 
-        // Display names of staff who are HOD
-        Console.WriteLine("\nStaff who are HOD:");
-        foreach (var staff in staffMembers)
+        Console.WriteLine("HODs:");
+        for (int i = 0; i < 5; i++)
         {
-            if (staff.Post.ToUpper() == "HOD")
-            {
-                Console.WriteLine(staff.Name);
-            }
+            staffArray[i].DisplayHOD();
         }
     }
 }
 
-
 -------------------------------------------------------------------------------
-10.	Write a program to declare class “Distance” have data members dist1, dist2 and dist3. Initialize the two data members using constructor and store their addition in third data member using method and display addition result.
+6.	Write a program to declare class “Distance” have data members dist1, dist2 and dist3. Initialize the two data members using constructor and store their addition in third data member using method and display addition result.
 Ans.
 using System;
 
@@ -214,25 +180,16 @@ class Distance
 {
     public int dist1, dist2, dist3;
 
-    // Constructor to initialize dist1 and dist2
     public Distance(int d1, int d2)
     {
         dist1 = d1;
         dist2 = d2;
-    }
-
-    // Method to calculate and store the addition of dist1 and dist2 in dist3
-    public void AddDistances()
-    {
         dist3 = dist1 + dist2;
     }
 
-    // Method to display the result
-    public void Display()
+    public void DisplayDistance()
     {
-        Console.WriteLine($"Distance 1: {dist1}");
-        Console.WriteLine($"Distance 2: {dist2}");
-        Console.WriteLine($"Sum of distances (Distance 3): {dist3}");
+        Console.WriteLine("The sum of distances is: " + dist3);
     }
 }
 
@@ -240,173 +197,141 @@ class Program
 {
     static void Main()
     {
-        // Taking user input for dist1 and dist2
-        Console.Write("Enter the first distance (dist1): ");
-        int dist1 = int.Parse(Console.ReadLine());
+        Console.Write("Enter distance 1: ");
+        int d1 = int.Parse(Console.ReadLine());
 
-        Console.Write("Enter the second distance (dist2): ");
-        int dist2 = int.Parse(Console.ReadLine());
+        Console.Write("Enter distance 2: ");
+        int d2 = int.Parse(Console.ReadLine());
 
-        // Create an object of Distance class with dist1 and dist2 initialized
-        Distance d = new Distance(dist1, dist2);
-
-        // Add the distances and calculate dist3
-        d.AddDistances();
-
-        // Display the result
-        d.Display();
+        Distance distanceObj = new Distance(d1, d2);
+        distanceObj.DisplayDistance();
     }
 }
 
 
 -------------------------------------------------------------------------------
-12.	Write a program using overloading to swap two integer numbers and swap two float numbers.
+7.	Write a program using overloading to swap two integer numbers and swap two float numbers.
 Ans.
 using System;
 
-class SwapExample
+class Swap
 {
-    // Method to swap two integers
-    public void Swap(ref int a, ref int b)
+    public void SwapIntegers(ref int a, ref int b)
     {
         int temp = a;
         a = b;
         b = temp;
     }
 
-    // Method to swap two floats
-    public void Swap(ref float a, ref float b)
+    public void SwapFloats(ref float a, ref float b)
     {
         float temp = a;
         a = b;
         b = temp;
     }
+}
 
+class Program
+{
     static void Main()
     {
-        SwapExample swapExample = new SwapExample();
+        Swap swapper = new Swap();
 
-        // Swapping two integers
-        Console.Write("Enter the first integer: ");
-        int intX = int.Parse(Console.ReadLine());
+        Console.Write("Enter two integer numbers: ");
+        int num1 = int.Parse(Console.ReadLine());
+        int num2 = int.Parse(Console.ReadLine());
+        swapper.SwapIntegers(ref num1, ref num2);
+        Console.WriteLine("Swapped integer values: a = " + num1 + ", b = " + num2);
 
-        Console.Write("Enter the second integer: ");
-        int intY = int.Parse(Console.ReadLine());
-
-        Console.WriteLine($"Before swapping integers: intX = {intX}, intY = {intY}");
-        swapExample.Swap(ref intX, ref intY);
-        Console.WriteLine($"After swapping integers: intX = {intX}, intY = {intY}");
-
-        // Swapping two floats
-        Console.Write("\nEnter the first float: ");
-        float floatP = float.Parse(Console.ReadLine());
-
-        Console.Write("Enter the second float: ");
-        float floatQ = float.Parse(Console.ReadLine());
-
-        Console.WriteLine($"Before swapping floats: floatP = {floatP}, floatQ = {floatQ}");
-        swapExample.Swap(ref floatP, ref floatQ);
-        Console.WriteLine($"After swapping floats: floatP = {floatP}, floatQ = {floatQ}");
+        Console.Write("Enter two float numbers: ");
+        float num3 = float.Parse(Console.ReadLine());
+        float num4 = float.Parse(Console.ReadLine());
+        swapper.SwapFloats(ref num3, ref num4);
+        Console.WriteLine("Swapped float values: a = " + num3 + ", b = " + num4);
     }
 }
 
-
 -------------------------------------------------------------------------------
-14.	Write a program to implement single inheritance from following figure. Accept and display data for object of Table.
+8.	Write a program to implement single inheritance from following figure. Accept and display data for object of Table.
 Ans.
 using System;
 
 class Furniture
 {
-    protected string material;
-    protected int price;
+    public string Material;
+    public int Price;
 
-    public void GetDetails()
+    public void GetFurnitureDetails()
     {
-        Console.WriteLine("Enter material:");
-        material = Console.ReadLine();
+        Console.Write("Enter Material: ");
+        Material = Console.ReadLine();
 
-        Console.WriteLine("Enter price (in Indian Rupees):");
-        price = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter Price: ");
+        Price = int.Parse(Console.ReadLine());
     }
 
-    public void DisplayDetails()
+    public void DisplayFurnitureDetails()
     {
-        Console.WriteLine("Material: " + material);
-        Console.WriteLine("Price: ₹" + price);
+        Console.WriteLine("Material: " + Material);
+        Console.WriteLine("Price: " + Price);
     }
 }
 
 class Table : Furniture
 {
-    private int height;
-    private double surface_area;
+    public int Height;
+    public int SurfaceArea;
 
     public void GetTableDetails()
     {
-        base.GetDetails();
+        Console.Write("Enter Height: ");
+        Height = int.Parse(Console.ReadLine());
 
-        Console.WriteLine("Enter height (in cm):");
-        height = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine("Enter surface area (in sq. cm):");
-        surface_area = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Enter Surface Area: ");
+        SurfaceArea = int.Parse(Console.ReadLine());
     }
 
     public void DisplayTableDetails()
     {
-        base.DisplayDetails();
-        Console.WriteLine("Height: " + height + " cm");
-        Console.WriteLine("Surface Area: " + surface_area + " sq. cm");
+        DisplayFurnitureDetails();
+        Console.WriteLine("Height: " + Height);
+        Console.WriteLine("Surface Area: " + SurfaceArea);
     }
 }
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         Table table = new Table();
 
+        table.GetFurnitureDetails();
         table.GetTableDetails();
+
         table.DisplayTableDetails();
     }
 }
 
  -------------------------------------------------------------------------------                
-16.	 Define a class ‘salary’ which will contain member variable Basic, TA, DA, HRA. Write a program using Constructor with default values for DA and HRA and calculate the salary of the employee.
- Ans.
+9.	 Define a class ‘salary’ which will contain member variable Basic, TA, DA, HRA. Write a program using Constructor with default values for DA and HRA and calculate the salary of the employee.
+Ans.
 using System;
 
 class Salary
 {
-    public double Basic;
-    public double TA;
-    public double DA;  // Default value for DA will be set in the constructor
-    public double HRA; // Default value for HRA will be set in the constructor
+    public int Basic, TA, DA, HRA;
 
-    // Constructor with default values for DA and HRA
-    public Salary(double basic, double ta, double da = 5000, double hra = 8000)
+    public Salary(int basic, int ta)
     {
         Basic = basic;
         TA = ta;
-        DA = da;
-        HRA = hra;
+        DA = 10; // Default value for DA
+        HRA = 15; // Default value for HRA
     }
 
-    // Method to calculate the total salary
-    public double CalculateSalary()
+    public int CalculateSalary()
     {
-        return Basic + TA + DA + HRA;
-    }
-
-    // Method to display the salary components
-    public void DisplaySalary()
-    {
-        Console.WriteLine($"Basic Salary: {Basic}");
-        Console.WriteLine($"TA: {TA}");
-        Console.WriteLine($"DA: {DA}");
-        Console.WriteLine($"HRA: {HRA}");
-        Console.WriteLine($"Total Salary: {CalculateSalary()}");
+        return Basic + TA + (Basic * DA / 100) + (Basic * HRA / 100);
     }
 }
 
@@ -414,57 +339,80 @@ class Program
 {
     static void Main()
     {
-        // Taking user input for Basic Salary and TA
-        Console.Write("Enter Basic Salary: ");
-        double basicSalary = double.Parse(Console.ReadLine());
+        Console.Write("Enter basic salary: ");
+        int basicSalary = int.Parse(Console.ReadLine());
 
-        Console.Write("Enter TA (Travel Allowance): ");
-        double ta = double.Parse(Console.ReadLine());
+        Console.Write("Enter TA: ");
+        int ta = int.Parse(Console.ReadLine());
 
-        // Creating a Salary object using the constructor with default DA and HRA
         Salary employeeSalary = new Salary(basicSalary, ta);
+        int totalSalary = employeeSalary.CalculateSalary();
 
-        // Display the salary details
-        employeeSalary.DisplaySalary();
+        Console.WriteLine("Total Salary: " + totalSalary);
     }
 }
 
 -------------------------------------------------------------------------------
 
-18.	Write a program to implement multilevel inheritance from following figure. Accept and display data for one student.
+10.	Write a program to implement multilevel inheritance from following figure. Accept and display data for one student.
 Ans.
 using System;
-using System.Globalization;
 
-class Salary
+class Student
 {
-    public decimal Basic { get; set; }
-    public decimal TA { get; set; } // Travel Allowance
-    public decimal DA { get; set; } // Dearness Allowance
-    public decimal HRA { get; set; } // House Rent Allowance
+    public int Roll_no;
+    public string Name;
 
-    // Constructor with default values for DA and HRA
-    public Salary(decimal basic, decimal ta, decimal da = 0.1m, decimal hra = 0.2m)
+    public void GetStudentDetails()
     {
-        Basic = basic;
-        TA = ta;
-        DA = da * Basic; // 10% of Basic by default
-        HRA = hra * Basic; // 20% of Basic by default
+        Console.Write("Enter Roll No: ");
+        Roll_no = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
     }
 
-    public decimal CalculateTotalSalary()
+    public void DisplayStudentDetails()
     {
-        return Basic + TA + DA + HRA;
+        Console.WriteLine("Roll No: " + Roll_no);
+        Console.WriteLine("Name: " + Name);
+    }
+}
+
+class Test : Student
+{
+    public int Marks1, Marks2;
+
+    public void GetTestMarks()
+    {
+        Console.Write("Enter Marks1: ");
+        Marks1 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter Marks2: ");
+        Marks2 = int.Parse(Console.ReadLine());
     }
 
-    public void DisplaySalaryDetails()
+    public void DisplayTestMarks()
     {
-        CultureInfo indianCulture = new CultureInfo("hi-IN");
-        Console.WriteLine($"Basic Salary: {Basic.ToString("C", indianCulture)}");
-        Console.WriteLine($"Travel Allowance (TA): {TA.ToString("C", indianCulture)}");
-        Console.WriteLine($"Dearness Allowance (DA): {DA.ToString("C", indianCulture)}");
-        Console.WriteLine($"House Rent Allowance (HRA): {HRA.ToString("C", indianCulture)}");
-        Console.WriteLine($"Total Salary: {CalculateTotalSalary().ToString("C", indianCulture)}");
+        Console.WriteLine("Marks1: " + Marks1);
+        Console.WriteLine("Marks2: " + Marks2);
+    }
+}
+
+class Result : Test
+{
+    public int Total;
+
+    public void CalculateTotal()
+    {
+        Total = Marks1 + Marks2;
+    }
+
+    public void DisplayResult()
+    {
+        DisplayStudentDetails();
+        DisplayTestMarks();
+        Console.WriteLine("Total Marks: " + Total);
     }
 }
 
@@ -472,19 +420,12 @@ class Program
 {
     static void Main()
     {
-        Console.Write("Enter Basic Salary: ");
-        decimal basic = Convert.ToDecimal(Console.ReadLine());
+        Result result = new Result();
 
-        Console.Write("Enter Travel Allowance (TA): ");
-        decimal ta = Convert.ToDecimal(Console.ReadLine());
+        result.GetStudentDetails();
+        result.GetTestMarks();
+        result.CalculateTotal();
 
-        // Create an object of Salary class
-        Salary salary = new Salary(basic, ta);
-
-        // Display salary details
-        Console.WriteLine("\nSalary Details:");
-        salary.DisplaySalaryDetails();
+        result.DisplayResult();
     }
 }
-
- 
